@@ -42,4 +42,4 @@ test_query = "请帮我查出近期河北各省气温总指数"
 test_sentence = " ".join(jieba.lcut(test_query))
 test_feature = vector.transform([test_sentence])
 print("待预测的文本", test_query)
-print("KNN模型预测结果: ", model.predict(test_feature))
+print("朴素贝叶斯模型预测结果: ", model.predict(test_feature))
