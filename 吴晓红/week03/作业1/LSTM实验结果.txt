@@ -1,0 +1,41 @@
+d:\miniconda3\python.exe D:\study\badou\直播\src\Week03\05_LSTM文本分类.py 
+Batch 个数 0, 当前Batch Loss: 2.475111246109009
+Batch 个数 50, 当前Batch Loss: 1.9451904296875
+Batch 个数 100, 当前Batch Loss: 1.198764443397522
+Batch 个数 150, 当前Batch Loss: 0.9011732339859009
+Batch 个数 200, 当前Batch Loss: 0.6472274661064148
+Batch 个数 250, 当前Batch Loss: 1.0099003314971924
+Batch 个数 300, 当前Batch Loss: 0.44375962018966675
+Batch 个数 350, 当前Batch Loss: 0.4297019839286804
+Epoch [1/4], Loss: 0.9929
+Batch 个数 0, 当前Batch Loss: 0.2518652677536011
+Batch 个数 50, 当前Batch Loss: 0.30668696761131287
+Batch 个数 100, 当前Batch Loss: 0.5596688985824585
+Batch 个数 150, 当前Batch Loss: 0.49124154448509216
+Batch 个数 200, 当前Batch Loss: 0.5325338244438171
+Batch 个数 250, 当前Batch Loss: 0.3872714936733246
+Batch 个数 300, 当前Batch Loss: 0.45120832324028015
+Batch 个数 350, 当前Batch Loss: 0.5580421090126038
+Epoch [2/4], Loss: 0.4195
+Batch 个数 0, 当前Batch Loss: 0.4225507378578186
+Batch 个数 50, 当前Batch Loss: 0.18584634363651276
+Batch 个数 100, 当前Batch Loss: 0.18340560793876648
+Batch 个数 150, 当前Batch Loss: 0.19635207951068878
+Batch 个数 200, 当前Batch Loss: 0.10059911012649536
+Batch 个数 250, 当前Batch Loss: 0.10977865755558014
+Batch 个数 300, 当前Batch Loss: 0.20800995826721191
+Batch 个数 350, 当前Batch Loss: 0.14837346971035004
+Epoch [3/4], Loss: 0.2845
+Batch 个数 0, 当前Batch Loss: 0.32080844044685364
+Batch 个数 50, 当前Batch Loss: 0.20002873241901398
+Batch 个数 100, 当前Batch Loss: 0.2754721939563751
+Batch 个数 150, 当前Batch Loss: 0.21910527348518372
+Batch 个数 200, 当前Batch Loss: 0.158089742064476
+Batch 个数 250, 当前Batch Loss: 0.12717334926128387
+Batch 个数 300, 当前Batch Loss: 0.16357377171516418
+Batch 个数 350, 当前Batch Loss: 0.26240694522857666
+Epoch [4/4], Loss: 0.2086
+输入 '帮我导航到北京' 预测为: 'Travel-Query'
+输入 '查询明天北京的天气' 预测为: 'Weather-Query'
+
+进程已结束，退出代码为 0

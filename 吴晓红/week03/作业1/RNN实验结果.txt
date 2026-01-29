@@ -1,0 +1,41 @@
+d:\miniconda3\python.exe D:\study\badou\直播\src\Week03\05_RNN文本分类.py 
+Batch 个数 0, 当前Batch Loss: 2.46793532371521
+Batch 个数 50, 当前Batch Loss: 2.3685851097106934
+Batch 个数 100, 当前Batch Loss: 2.4810101985931396
+Batch 个数 150, 当前Batch Loss: 2.3668739795684814
+Batch 个数 200, 当前Batch Loss: 2.3751766681671143
+Batch 个数 250, 当前Batch Loss: 2.3366658687591553
+Batch 个数 300, 当前Batch Loss: 2.407789707183838
+Batch 个数 350, 当前Batch Loss: 2.3311264514923096
+Epoch [1/4], Loss: 2.3738
+Batch 个数 0, 当前Batch Loss: 2.338536262512207
+Batch 个数 50, 当前Batch Loss: 2.3169727325439453
+Batch 个数 100, 当前Batch Loss: 2.4090378284454346
+Batch 个数 150, 当前Batch Loss: 2.37815260887146
+Batch 个数 200, 当前Batch Loss: 2.3299834728240967
+Batch 个数 250, 当前Batch Loss: 2.30747652053833
+Batch 个数 300, 当前Batch Loss: 2.454838991165161
+Batch 个数 350, 当前Batch Loss: 2.264927625656128
+Epoch [2/4], Loss: 2.3635
+Batch 个数 0, 当前Batch Loss: 2.4874374866485596
+Batch 个数 50, 当前Batch Loss: 2.4041876792907715
+Batch 个数 100, 当前Batch Loss: 2.3436810970306396
+Batch 个数 150, 当前Batch Loss: 2.2237298488616943
+Batch 个数 200, 当前Batch Loss: 2.249640941619873
+Batch 个数 250, 当前Batch Loss: 2.4343671798706055
+Batch 个数 300, 当前Batch Loss: 2.4144721031188965
+Batch 个数 350, 当前Batch Loss: 2.383436679840088
+Epoch [3/4], Loss: 2.3596
+Batch 个数 0, 当前Batch Loss: 2.2960474491119385
+Batch 个数 50, 当前Batch Loss: 2.38152813911438
+Batch 个数 100, 当前Batch Loss: 2.3334619998931885
+Batch 个数 150, 当前Batch Loss: 2.5625863075256348
+Batch 个数 200, 当前Batch Loss: 2.3140571117401123
+Batch 个数 250, 当前Batch Loss: 2.36963152885437
+Batch 个数 300, 当前Batch Loss: 2.3299858570098877
+Batch 个数 350, 当前Batch Loss: 2.419222593307495
+Epoch [4/4], Loss: 2.3591
+输入 '帮我导航到北京' 预测为: 'FilmTele-Play'
+输入 '查询明天北京的天气' 预测为: 'FilmTele-Play'
+
+进程已结束，退出代码为 0
