@@ -24,7 +24,7 @@ import os
 # =========================
 
 client = openai.OpenAI(
-    api_key=os.getenv("DASHSCOPE_API_KEY") if None else "sk-f0ab3fca58044adcb75b5a60974549b3",
+    api_key=os.getenv("DASHSCOPE_API_KEY") if None else "sk-f0abuabu58044adcb75b5a60974549b3",
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
