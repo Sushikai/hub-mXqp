@@ -1,0 +1,538 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: 作业2-意图识别与RAG问答
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.3.2@d70fb969e7c79719bee96573a8f4c9dc4ffd984f4171b9184cc3869c886af45d
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1774338279490-source-1774338466974-target
+      source: '1774338279490'
+      sourceHandle: source
+      target: '1774338466974'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1774338466974-1-1774338602060-target
+      source: '1774338466974'
+      sourceHandle: '1'
+      target: '1774338602060'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1774338602060-source-1774338618671-target
+      source: '1774338602060'
+      sourceHandle: source
+      target: '1774338618671'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1774338623769-source-17743386507530-target
+      source: '1774338623769'
+      sourceHandle: source
+      target: '17743386507530'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1774338636587-source-17743386639120-target
+      source: '1774338636587'
+      sourceHandle: source
+      target: '17743386639120'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17743386507530-source-17743386736880-target
+      source: '17743386507530'
+      sourceHandle: source
+      target: '17743386736880'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17743386639120-source-17743386774450-target
+      source: '17743386639120'
+      sourceHandle: source
+      target: '17743386774450'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1774338466974-2-1774338623769-target
+      source: '1774338466974'
+      sourceHandle: '2'
+      target: '1774338623769'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1774338466974-1774338482580-1774338636587-target
+      source: '1774338466974'
+      sourceHandle: '1774338482580'
+      target: '1774338636587'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables: []
+      height: 73
+      id: '1774338279490'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          name: '普通问题
+
+            非机器学习、非大模型相关的问题，例如日常问答、生活常识、普通知识问答。
+
+            '
+        - id: '2'
+          name: '机器学习问题
+
+            涉及机器学习基础概念、监督学习、无监督学习、分类、回归、聚类、过拟合、欠拟合、决策树、支持向量机、K近邻、朴素贝叶斯、评估指标等问题。
+
+            '
+        - id: '1774338482580'
+          name: '大模型问题
+
+            涉及大语言模型、Transformer、Prompt、RAG、Embedding、Agent、微调、向量数据库、模型幻觉、上下文窗口等问题。
+
+            '
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-5.2
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1774338279490'
+        - sys.query
+        selected: false
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 208
+      id: '1774338466974'
+      position:
+        x: 382
+        y: 282
+      positionAbsolute:
+        x: 382
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-5.2
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: b5bb0ffe-fc5a-47ff-8aa1-5ff57fdd5dff
+          role: system
+          text: '你是通用问答助手，请直接回答用户问题。回答要求简洁、清楚、自然。
+
+            '
+        - id: 5b73449a-b962-48ed-a947-987866de237f
+          role: user
+          text: '{{#sys.query#}}'
+        selected: false
+        title: 普通问题回答LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1774338602060'
+      position:
+        x: 684
+        y: 282
+      positionAbsolute:
+        x: 684
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1774338602060.text#}}'
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1774338618671'
+      position:
+        x: 986
+        y: 282
+      positionAbsolute:
+        x: 986
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - jvnoa/q48v+zyYZGDFPwDSux8OI4CYPbeR1PGvpl/WJyHZI4/ieo6jPaOWyxVP2D
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: weighted_score
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0
+            vector_setting:
+              embedding_model_name: text-embedding-3-large
+              embedding_provider_name: langgenius/openai/openai
+              vector_weight: 1
+            weight_type: customized
+        query_attachment_selector: []
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 90
+      id: '1774338623769'
+      position:
+        x: 939.9469488866507
+        y: 409
+      positionAbsolute:
+        x: 939.9469488866507
+        y: 409
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - Izc1+fMuaQkT0n/oOqSRbboEIl7vWcBfpsZSPYegxAS3P/ADiCDpk6pcKyISNN/s
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: weighted_score
+          score_threshold: 0.3
+          top_k: 5
+          weights:
+            keyword_setting:
+              keyword_weight: 0
+            vector_setting:
+              embedding_model_name: text-embedding-3-large
+              embedding_provider_name: langgenius/openai/openai
+              vector_weight: 1
+            weight_type: customized
+        query_attachment_selector: []
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 2
+        type: knowledge-retrieval
+      height: 90
+      id: '1774338636587'
+      position:
+        x: 939.9469488866507
+        y: 525.9396725655505
+      positionAbsolute:
+        x: 939.9469488866507
+        y: 525.9396725655505
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-5.2
+          provider: langgenius/openai/openai
+        prompt_config:
+          jinja2_variables:
+          - value_selector:
+            - '1774338623769'
+            - result
+            variable: result
+          - value_selector:
+            - sys
+            - query
+            variable: query
+        prompt_template:
+        - id: b5bb0ffe-fc5a-47ff-8aa1-5ff57fdd5dff
+          role: system
+          text: '你是机器学习问答助手。
+
+
+            你只能依据“检索内容”回答问题，禁止使用你自己的外部知识、常识、推测或补充说明。
+
+
+            回答规则：
+
+            1. 只允许使用检索内容中的信息作答。
+
+            2. 如果检索内容无法直接支持答案，必须回复：“知识库中未检索到足够相关内容，无法回答该问题。”
+
+            3. 不要扩展，不要联想，不要补充知识库外的信息。
+
+            4. 回答尽量简洁，优先按检索内容原意组织答案。
+
+            '
+        - edition_type: jinja2
+          id: b3b790c8-2f8b-4689-a19e-53bf85da41ab
+          jinja2_text: "用户问题：{{ query }}\r\n检索内容：{{ result }}"
+          role: user
+          text: '用户问题：
+
+            {{#sys.query#}}
+
+
+            检索内容：
+
+            '
+        selected: false
+        title: 机器学习回答LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '17743386507530'
+      position:
+        x: 1213.8061848729353
+        y: 409
+      positionAbsolute:
+        x: 1213.8061848729353
+        y: 409
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-5.2
+          provider: langgenius/openai/openai
+        prompt_config:
+          jinja2_variables:
+          - value_selector:
+            - sys
+            - query
+            variable: query
+          - value_selector:
+            - '1774338636587'
+            - result
+            variable: result
+        prompt_template:
+        - id: b5bb0ffe-fc5a-47ff-8aa1-5ff57fdd5dff
+          role: system
+          text: '你只能依据检索内容回答问题，禁止使用知识库之外的信息。
+
+
+            如果用户的问题包含多个子问题，请先判断检索内容是否分别覆盖这些子问题：
+
+            1. 对于检索内容明确包含的信息，正常回答
+
+            2. 对于检索内容没有覆盖的信息，明确写“知识库中未检索到足够相关内容”
+
+            3. 不要把某一段检索不到，误判成整个问题都检索不到
+
+            4. 不要补充常识，不要推测，不要编造
+
+            5. 多个问题按问题数量进行回复
+
+            '
+        - edition_type: jinja2
+          id: 94a3c0b8-70a0-4939-9520-f6fedcae2a30
+          jinja2_text: "用户问题：{{ query }}\r\n检索内容：{{ result }}"
+          role: user
+          text: ''
+        selected: false
+        title: 大模型知识库回答LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '17743386639120'
+      position:
+        x: 1213.8061848729353
+        y: 525.9396725655505
+      positionAbsolute:
+        x: 1213.8061848729353
+        y: 525.9396725655505
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#17743386507530.text#}}'
+        selected: false
+        title: 直接回复 (1)
+        type: answer
+        variables: []
+      height: 103
+      id: '17743386736880'
+      position:
+        x: 1472.7743100930954
+        y: 409
+      positionAbsolute:
+        x: 1472.7743100930954
+        y: 409
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#17743386639120.text#}}'
+        selected: false
+        title: 直接回复 (1)
+        type: answer
+        variables: []
+      height: 103
+      id: '17743386774450'
+      position:
+        x: 1472.7743100930954
+        y: 525.9396725655505
+      positionAbsolute:
+        x: 1472.7743100930954
+        y: 525.9396725655505
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -626.8906374960613
+      y: 70.36807140325965
+      zoom: 0.6496469612661671
+  rag_pipeline_variables: []
