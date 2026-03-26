@@ -1,0 +1,1385 @@
+app:
+  description: '本项目基于大语言模型与企业知识库构建一个智能立项评审 Agent，支持员工提交项目立项书后，自动完成创新性评估、市场价值分析及流程合规判断。
+
+
+    Agent 能够解析立项书中的项目内容，从技术创新、专利可行性、行业归属、市场竞品以及公司制度流程等多个维度进行综合分析，并输出结构化评审报告，辅助企业决策，提高立项审核效率与质量。'
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: 智能立项评审 Agent
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.33@608ec1e7d07dd52e582cff58561a8c75c989951186ffc59452dfffe3d8051230
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      - document
+      - audio
+      - video
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 4
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1774288292255-false-llm-target
+      selected: false
+      source: '1774288292255'
+      sourceHandle: 'false'
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1774291453939-source-1774297996288-target
+      selected: false
+      source: '1774291453939'
+      sourceHandle: source
+      target: '1774297996288'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1774292947428-source-1774298235289-target
+      selected: false
+      source: '1774292947428'
+      sourceHandle: source
+      target: '1774298235289'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: knowledge-retrieval
+      id: 1774306685671-source-1774292947428-target
+      source: '1774306685671'
+      sourceHandle: source
+      target: '1774292947428'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1774290019356-source-1774308074010-target
+      source: '1774290019356'
+      sourceHandle: source
+      target: '1774308074010'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1774298046233-source-1774308120197-target
+      source: '1774298046233'
+      sourceHandle: source
+      target: '1774308120197'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1774297996288-source-1774308144222-target
+      source: '1774297996288'
+      sourceHandle: source
+      target: '1774308144222'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1774298235289-source-1774308256876-target
+      source: '1774298235289'
+      sourceHandle: source
+      target: '1774308256876'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: if-else
+      id: 1774287774988-source-1774288292255-target
+      source: '1774287774988'
+      sourceHandle: source
+      target: '1774288292255'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1774308939097-1-1774290019356-target
+      source: '1774308939097'
+      sourceHandle: '1'
+      target: '1774290019356'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1774308939097-2-1774298046233-target
+      source: '1774308939097'
+      sourceHandle: '2'
+      target: '1774298046233'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1774308939097-1774308984336-1774291453939-target
+      source: '1774308939097'
+      sourceHandle: '1774308984336'
+      target: '1774291453939'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: template-transform
+      id: 1774308939097-1774309005829-1774306685671-target
+      source: '1774308939097'
+      sourceHandle: '1774309005829'
+      target: '1774306685671'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: question-classifier
+      id: 1774287869016-source-1774308939097-target
+      source: '1774287869016'
+      sourceHandle: source
+      target: '1774308939097'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1774310721490-source-1774287869016-target
+      source: '1774310721490'
+      sourceHandle: source
+      target: '1774287869016'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: question-classifier
+      id: 1774288292255-true-1774313524859-target
+      source: '1774288292255'
+      sourceHandle: 'true'
+      target: '1774313524859'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: document-extractor
+      id: 1774313524859-1-1774310721490-target
+      source: '1774313524859'
+      sourceHandle: '1'
+      target: '1774310721490'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1774313524859-2-1774309228681-target
+      source: '1774313524859'
+      sourceHandle: '2'
+      target: '1774309228681'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables: []
+      height: 73
+      id: '1774287774988'
+      position:
+        x: -492.7948161070597
+        y: 689.8986416754533
+      positionAbsolute:
+        x: -492.7948161070597
+        y: 689.8986416754533
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 76033e9c-7a4b-43a6-93fa-6926cf15220a
+          role: system
+          text: '【重要前提】
+
+            用户必须上传文件后，才可以触发任何功能。
+
+            如果用户未上传文件，应提示用户先上传文件，并说明支持的分析能力。
+
+            【你的核心能力包括以下四类】严格输出类别名称
+
+            1.创新性分析
+
+            从技术方案、实现路径、应用方式等角度判断项目是否具有创新性
+
+
+            2.专利检查
+
+            基于文件内容提取关键技术
+
+            判断相似性及潜在侵权风险
+
+
+            3.行业识别与竞品分析
+
+
+            4.项目申报流程总结
+
+            根据项目内容匹配可能的申报方向（如科技项目、政府补贴等）
+
+            梳理申报流程、关键节点及所需材料
+
+            提供结构化流程总结
+
+            【交互规则】
+
+            若用户未上传文件：提示“请上传项目相关文件（如PDF/Word/文本），我将为你进行分析”
+
+            '
+        selected: true
+        title: 聊天模块
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: llm
+      position:
+        x: 169.67121886604912
+        y: 947.3545549036512
+      positionAbsolute:
+        x: 169.67121886604912
+        y: 947.3545549036512
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#llm.text#}}'
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 102
+      id: answer
+      position:
+        x: 699.9471908153153
+        y: 968.926802832066
+      positionAbsolute:
+        x: 699.9471908153153
+        y: 968.926802832066
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            enable_search: true
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-plus-2026-02-15
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 6a3c5f39-f3a6-463b-b78b-5553d709fbb2
+          role: system
+          text: '请从以下立项书内容中提取关键信息，并严格按照 JSON 输出。
+
+
+            提取字段要求：
+
+            1. project_name：项目名称
+
+            2. project_background：项目背景
+
+            3. project_goal：项目目标
+
+            4. core_technology：核心技术描述
+
+            5. innovation_points：项目宣称的创新点，输出数组
+
+            6. application_scenario：应用场景
+
+            7. budget：项目金额，如无法明确识别请输出原文中最可能相关的金额描述
+
+            8. expected_benefit：预期收益/价值
+
+            9. industry_keywords：与行业相关的关键词，输出数组
+
+            10.project_type: 项目的类型
+
+
+            要求：
+
+            - 只输出 JSON
+
+            - 不要添加解释
+
+            - 如果某字段缺失，填空字符串或空数组
+
+            '
+        - id: 7cc41c00-e4a4-43b7-b59e-e88f21d3d117
+          role: user
+          text: '
+
+            立项书内容：
+
+            {{#1774310721490.text#}}'
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              application_scenario:
+                description: 应用场景，说明项目落地在哪些业务场景
+                type: string
+              budget:
+                description: 项目金额，优先提取明确金额，如“100万元”；如果不确定，输出最接近的金额描述
+                type: string
+              core_technology:
+                description: 核心技术描述，包括算法、系统、平台或技术路线
+                type: string
+              expected_benefit:
+                description: 预期收益或价值，包括经济效益、效率提升、安全提升等
+                type: string
+              industry_keywords:
+                description: 行业关键词，用于行业识别和竞品分析，例如 民航、智慧运维、预测性维护
+                items:
+                  type: string
+                type: array
+              innovation_points:
+                description: 项目宣称的创新点，必须拆成数组，每个点一句话
+                items:
+                  type: string
+                type: array
+              policy_retrieval_profile:
+                additionalProperties: false
+                description: 用于制度知识库检索和审批流程判断的结构化信息，不用于展示，而是用于RAG召回
+                properties:
+                  budget_amount_num:
+                    description: 提取后的数值金额（单位：万元），例如“100万元”提取为100；如果无法确定则填0
+                    type: number
+                  budget_amount_raw:
+                    description: 原始金额文本，例如“100万元”
+                    type: string
+                  budget_sources:
+                    description: 资金来源，例如 集团补助、自有资金、其他资金；可以多个
+                    items:
+                      type: string
+                    type: array
+                  collaboration_amount_num:
+                    description: 协作费金额数值（单位：万元）
+                    type: number
+                  collaboration_amount_raw:
+                    description: 协作费或外部合作费用金额原文
+                    type: string
+                  equipment_purchase_amount_num:
+                    description: 设备购置费数值（单位：万元），无法确定则填0
+                    type: number
+                  equipment_purchase_amount_raw:
+                    description: 设备购置费金额原文，例如“20万元”，没有则为空字符串
+                    type: string
+                  has_equipment_purchase:
+                    description: 是否包含设备购置费，如果预算中出现设备购置费则为true
+                    type: boolean
+                  has_external_collaboration:
+                    description: 是否存在协作费/外部合作/第三方服务费用
+                    type: boolean
+                  is_tech_innovation_project:
+                    description: 是否属于科技创新项目，如果project_type中包含“科技创新”则为true
+                    type: boolean
+                  project_stage:
+                    description: 项目阶段，例如 立项、变更、结题。本任务默认填写“立项”
+                    type: string
+                  requires_budget_rule_check:
+                    description: 是否需要匹配预算审批制度（所有项目一般为true）
+                    type: boolean
+                  requires_fixed_asset_rule_check:
+                    description: 如果存在设备购置，则为true，用于触发固定资产投资制度检索
+                    type: boolean
+                  requires_tech_project_rule_check:
+                    description: 是否需要匹配科技创新项目管理制度，如果是科技创新项目则为true
+                    type: boolean
+                  retrieval_hints:
+                    description: 用于知识库检索的关键词提示，例如 科技创新项目、100万元、审批、总经理办公会、设备购置
+                    items:
+                      type: string
+                    type: array
+                  retrieval_query_seed:
+                    description: 用于直接进行知识库召回的查询字符串，将关键条件拼接为一句话，例如“科技创新项目 100万元 立项
+                      审批权限 总经理办公会”
+                    type: string
+                required:
+                - project_stage
+                - is_tech_innovation_project
+                - budget_amount_raw
+                - budget_amount_num
+                - budget_sources
+                - has_equipment_purchase
+                - has_external_collaboration
+                - requires_tech_project_rule_check
+                - requires_budget_rule_check
+                - requires_fixed_asset_rule_check
+                - retrieval_hints
+                - retrieval_query_seed
+                type: object
+              project_background:
+                description: 项目背景，对项目为什么要做进行总结
+                type: string
+              project_goal:
+                description: 项目目标，说明项目要达成的核心目的
+                type: string
+              project_name:
+                description: 项目名称，必须从原文中准确提取
+                type: string
+              project_type:
+                description: 项目类型，例如 科技创新项目、采购项目、信息化项目等，必须尽量从原文判断
+                type: string
+            required:
+            - project_name
+            - project_background
+            - project_goal
+            - core_technology
+            - innovation_points
+            - application_scenario
+            - budget
+            - expected_benefit
+            - industry_keywords
+            - project_type
+            - policy_retrieval_profile
+            type: object
+        structured_output_enabled: true
+        title: 项目摘要与标准化LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1774287869016'
+      position:
+        x: 808.2266038351679
+        y: 533.297487163004
+      positionAbsolute:
+        x: 808.2266038351679
+        y: 533.297487163004
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 418a4689-564d-4164-9008-94aaddc368be
+            value: ''
+            varType: array[file]
+            variable_selector:
+            - sys
+            - files
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 124
+      id: '1774288292255'
+      position:
+        x: -154.28512541300438
+        y: 674.8628598391191
+      positionAbsolute:
+        x: -154.28512541300438
+        y: 674.8628598391191
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-plus
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: b47b3d6b-3040-4b62-b2e2-8ce6fffa99cb
+          role: system
+          text: '你是一名企业研发立项评审专家。请基于以下项目信息，对项目的创新性进行评估。
+
+
+            评估维度：
+
+            1. 技术方案是否具有明显新颖性
+
+            2. 是否只是已有方案的常规组合或业务包装
+
+            3. 是否具备技术门槛
+
+            4. 是否具有可落地的技术差异化
+
+            5. 创新点是否清晰、具体、可验证
+
+
+            请输出以下格式：
+
+
+            一、创新性等级
+
+            - 高 / 中 / 低
+
+
+            二、创新性判断
+
+            - 用 3-5 点说明理由
+
+
+            三、创新风险
+
+            - 指出该项目在创新性论证上可能存在的问题
+
+
+            四、建议
+
+            - 建议继续推进 / 建议补充技术论证 / 建议谨慎立项
+
+
+            '
+        - id: 48d808d6-5a27-44aa-a712-7c837751977a
+          role: user
+          text: '项目信息：
+
+            {{#1774287869016.structured_output.project_name#}}{{#1774287869016.structured_output.project_goal#}}{{#1774287869016.structured_output.core_technology#}}{{#1774287869016.structured_output.innovation_points#}}'
+        selected: false
+        title: 创新性分析LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1774290019356'
+      position:
+        x: 1674.230449607175
+        y: 3.469869335212053
+      positionAbsolute:
+        x: 1674.230449607175
+        y: 3.469869335212053
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            enable_search: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-plus
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: b903e917-9acb-40e7-a25f-95dfe318deb9
+          role: system
+          text: '你是一名行业分析助手。请根据以下项目信息判断该项目是否属于民航业项目，并说明理由。
+
+
+            判断标准包括但不限于：
+
+            - 是否服务于航空公司、机场、空管、机务、航材、航旅服务、民航运行保障等场景
+
+            - 是否面向民航业务链条中的核心主体
+
+            - 是否主要解决民航行业中的业务问题
+
+
+            请输出以下格式：
+
+
+            一、行业判断
+
+            - 民航业 / 非民航业 / 与民航业相关但不属于核心民航项目
+
+
+            二、判断理由
+
+            - 用 3 条以内简明说明
+
+
+            三、可用于竞品检索的行业标签
+
+            - 输出 3~8 个关键词，逗号分隔
+
+
+            '
+        - id: b2cb2814-f2f7-4479-8d64-78b48820508f
+          role: user
+          text: '项目信息：
+
+            {{#1774287869016.structured_output.project_name#}}/{{#1774287869016.structured_output.project_background#}}{{#1774287869016.structured_output.project_goal#}}'
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              industry_type:
+                description: 对项目的行业判断
+                enum:
+                - 民航业
+                - 非民航业
+                - 与民航业相关但不属于核心民航项目
+                type: string
+              keywords:
+                description: 可用于竞品检索的行业标签
+                items:
+                  type: string
+                type: array
+            required:
+            - keywords
+            - industry_type
+            type: object
+        structured_output_enabled: true
+        title: 行业识别LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1774291453939'
+      position:
+        x: 1666.8948248151037
+        y: 434.1120536359784
+      positionAbsolute:
+        x: 1666.8948248151037
+        y: 434.1120536359784
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - eHO23wssw2cH12GBeDlrGRWZcCbHChrPuqFsjD5/umuKkVdi8U9h8jh0Vi2qU35v
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1774306685671'
+        - output
+        retrieval_mode: multiple
+        selected: false
+        title: 项目立项知识库召回
+        type: knowledge-retrieval
+      height: 90
+      id: '1774292947428'
+      position:
+        x: 1811.4660057909064
+        y: 769.3826292820713
+      positionAbsolute:
+        x: 1811.4660057909064
+        y: 769.3826292820713
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            enable_search: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-plus
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: ed407c66-f28a-4609-a793-12419a7f49c4
+          role: system
+          text: '你是一个产业分析专家和技术产品分析师，擅长竞品调研和市场对比分析。
+
+
+            你的任务是：
+
+            1. 基于项目的技术和行业关键词，生成竞品检索策略
+
+            2. 使用联网搜索识别市场上的相关产品、公司或解决方案
+
+            3. 分析这些竞品与项目的相似性与差异
+
+            4. 判断项目的市场竞争格局与机会
+
+
+            要求：
+
+            - 重点分析“技术路径 + 产品能力”，而不是简单公司介绍
+
+            - 区分直接竞品（解决同一问题）和间接竞品（替代方案）
+
+            - 必须指出具体差异，不允许泛泛描述'
+        - id: 3423f25a-4813-41c7-9034-2e5f3870bf01
+          role: user
+          text: '请对以下项目进行竞品分析：
+
+
+            【项目名称】
+
+            {{#1774287869016.structured_output.project_name#}}
+
+
+            【核心技术】
+
+            {{#1774287869016.structured_output.core_technology#}}
+
+
+            【创新点】
+
+            {{#1774287869016.structured_output.innovation_points#}}
+
+
+            【应用场景】
+
+            {{#1774287869016.structured_output.application_scenario#}}
+
+
+            【行业类型】
+
+            {{#1774291453939.structured_output.industry_type#}}
+
+
+            【行业关键词】
+
+            {{#1774287869016.structured_output.industry_keywords#}}
+
+
+            【检索关键词】
+
+            {{#1774291453939.structured_output.keywords#}}
+
+
+            请按以下步骤完成：
+
+
+            1️⃣ 生成竞品检索查询（中英文结合）
+
+
+            2️⃣ 使用联网搜索识别竞品（至少3-5个），可以包括：
+
+            - 公司
+
+            - 产品
+
+            - 技术解决方案
+
+
+            3️⃣ 对每个竞品进行分析：
+
+            - 核心功能
+
+            - 技术特点
+
+            - 与本项目的相似点（必须具体）
+
+            - 与本项目的差异点（必须具体）
+
+            - 市场定位
+
+            - 威胁程度
+
+
+            4️⃣ 综合分析：
+
+            - 哪些是直接竞品
+
+            - 哪些是间接竞品
+
+            - 当前市场是否已有成熟解决方案
+
+            - 本项目是否存在差异化空间
+
+            '
+        selected: false
+        title: 竞品分析
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1774297996288'
+      position:
+        x: 2003.819859039309
+        y: 392.8907861931929
+      positionAbsolute:
+        x: 2003.819859039309
+        y: 392.8907861931929
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            enable_search: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-plus
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 045952c6-8e4b-4bc4-8000-e81827b4ccea
+          role: system
+          text: '请对以下项目进行专利检索与创新性分析：
+
+
+            【项目名称】
+
+            {{#1774287869016.structured_output.project_name#}}
+
+
+            【核心技术】
+
+            {{#1774287869016.structured_output.core_technology#}}
+
+
+            【创新点】
+
+            {{#1774287869016.structured_output.innovation_points#}}
+
+
+            【应用场景】
+
+            {{#1774287869016.structured_output.application_scenario#}}
+
+
+            【行业关键词】
+
+            {{#1774287869016.structured_output.industry_keywords#}}
+
+
+            请按以下步骤完成：
+
+            1️⃣ 生成专利检索关键词（中英文）
+
+            2️⃣ 使用联网搜索查找相关专利或类似技术（至少3个）
+
+            3️⃣ 对每个结果分析：
+
+            - 技术是否相似
+
+            - 相似在哪里（必须具体）
+
+            - 是否构成潜在冲突
+
+            4️⃣ 综合判断：
+
+            - 项目是否具有创新性
+
+            - 是否存在专利风险'
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              conclusion:
+                description: 综合结论
+                type: string
+              infringement_risk:
+                description: 专利侵权风险分析
+                type: string
+              novelty_analysis:
+                description: 项目整体创新性分析
+                type: string
+              patent_search_keywords:
+                description: 专利检索关键词（中英文）
+                items:
+                  type: string
+                type: array
+              related_patents:
+                description: 相关专利或类似技术列表（至少3个）
+                items:
+                  additionalProperties: false
+                  properties:
+                    link:
+                      description: 相关专利或技术的链接URL
+                      type: string
+                    risk_level:
+                      description: 潜在冲突风险等级（如：高/中/低）
+                      type: string
+                    similarity_reason:
+                      description: 相似性分析（必须具体说明相似点）
+                      type: string
+                    summary:
+                      description: 专利或技术摘要
+                      type: string
+                    title:
+                      description: 专利标题
+                      type: string
+                  required:
+                  - title
+                  - summary
+                  - similarity_reason
+                  - risk_level
+                  - link
+                  type: object
+                type: array
+            required:
+            - patent_search_keywords
+            - related_patents
+            - novelty_analysis
+            - infringement_risk
+            - conclusion
+            type: object
+        structured_output_enabled: true
+        title: 专利检查
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1774298046233'
+      position:
+        x: 1755.1194779543425
+        y: 224.65721934369537
+      positionAbsolute:
+        x: 1755.1194779543425
+        y: 224.65721934369537
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1774292947428'
+          - result
+        model:
+          completion_params: {}
+          mode: chat
+          name: qvq-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 4609fda7-fe29-42ab-a7ea-ceadb91b7eef
+          role: system
+          text: "你是企业项目审批与制度分析专家，熟悉公司内部制度、审批流程和管理规则。\n\n你的任务是：\n基于项目的结构化信息，以及检索到的公司制度内容，判断该项目的立项审批流程。\n\
+            \n你必须遵守以下规则：\n\n1. 所有判断必须基于提供的制度内容，不得凭空推测\n2. 如果制度中存在明确金额区间或审批规则，必须严格按照规则判断\n\
+            3. 必须明确指出：\n   - 是否需要上会\n   - 上什么会（总经理办公会 / 党委会 / 董事会 / 其他）\n4. 如果命中了多个制度（如科技项目\
+            \ + 预算制度），必须综合分析\n5. 如果制度未明确规定，必须说明“制度未明确规定”，不得编造"
+        - id: f9aa8818-d547-43c8-9935-83390716a623
+          role: user
+          text: '以下是项目的审批相关结构化信息：
+
+            {{#1774287869016.structured_output.project_name#}}
+
+            {{#1774287869016.structured_output.project_goal#}}
+
+            {{#1774287869016.structured_output.policy_retrieval_profile#}}
+
+
+            以下是公司制度相关内容（知识库召回）：
+
+            {{#context#}}
+
+
+            请完成以下任务：
+
+
+            1️⃣ 判断该项目适用哪些制度（例如：科技创新项目管理办法、预算管理办法等）
+
+
+            2️⃣ 基于制度规则，判断审批路径：
+
+            - 是否需要上会
+
+            - 上什么会
+
+            - 是否需要专家评审 / 科委会 / 预算委员会等前置环节
+
+
+            3️⃣ 输出完整审批流程（从申报到最终审批）
+
+
+            4️⃣ 明确说明你的判断依据（必须引用制度逻辑，而不是主观推断）'
+        selected: false
+        title: 项目流程总结
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1774298235289'
+      position:
+        x: 2070.59299830495
+        y: 634.4968686814818
+      positionAbsolute:
+        x: 2070.59299830495
+        y: 634.4968686814818
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        selected: false
+        template: '{{ arg1 }}'
+        title: 模板转换
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1774287869016'
+          - structured_output
+          - policy_retrieval_profile
+          value_type: object
+          variable: arg1
+      height: 52
+      id: '1774306685671'
+      position:
+        x: 1555.2288025181554
+        y: 650.701070687033
+      positionAbsolute:
+        x: 1555.2288025181554
+        y: 650.701070687033
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '以下是创新性分析的结果：
+
+          {{#1774290019356.text#}}'
+        selected: false
+        title: 直接回复 3
+        type: answer
+        variables: []
+      height: 118
+      id: '1774308074010'
+      position:
+        x: 1990.455290841539
+        y: -64.47783413672126
+      positionAbsolute:
+        x: 1990.455290841539
+        y: -64.47783413672126
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '以下是专利检查的结果：
+
+          {{#1774298046233.text#}}'
+        selected: false
+        title: 直接回复 4
+        type: answer
+        variables: []
+      height: 118
+      id: '1774308120197'
+      position:
+        x: 2149.2142991513806
+        y: 142.4968522300275
+      positionAbsolute:
+        x: 2149.2142991513806
+        y: 142.4968522300275
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: 以下是竞品分析的结果{{#1774297996288.text#}}
+        selected: false
+        title: 直接回复 5
+        type: answer
+        variables: []
+      height: 118
+      id: '1774308144222'
+      position:
+        x: 2419.3573074418673
+        y: 294.9322713215368
+      positionAbsolute:
+        x: 2419.3573074418673
+        y: 294.9322713215368
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '以下是项目立项流程总结结果：
+
+          {{#1774298235289.text#}}'
+        selected: false
+        title: 直接回复 6
+        type: answer
+        variables: []
+      height: 118
+      id: '1774308256876'
+      position:
+        x: 2478.336801097465
+        y: 500.4273612959332
+      positionAbsolute:
+        x: 2478.336801097465
+        y: 500.4273612959332
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          name: 创新性分析
+        - id: '2'
+          name: 专利检查
+        - id: '1774308984336'
+          name: 行业识别和竞品分析
+        - id: '1774309005829'
+          name: 项目流程总结
+        instruction: ''
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-plus
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1774287774988'
+        - sys.query
+        selected: false
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 246
+      id: '1774308939097'
+      position:
+        x: 1166.2697214505763
+        y: 117.61207690431678
+      positionAbsolute:
+        x: 1166.2697214505763
+        y: 117.61207690431678
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '注意，请重新上传文件并输入下面的类别进行查询：
+
+          创新性分析 | 专利检查 | 竞品分析 | 项目上会流程总结 （每次选择一个）'
+        selected: false
+        title: 直接回复 6
+        type: answer
+        variables: []
+      height: 148
+      id: '1774309228681'
+      position:
+        x: 985.2556084443836
+        y: 737.8109905342116
+      positionAbsolute:
+        x: 985.2556084443836
+        y: 737.8109905342116
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        is_array_file: true
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - sys
+        - files
+      height: 104
+      id: '1774310721490'
+      position:
+        x: 505.5870555905931
+        y: 313.4252058790208
+      positionAbsolute:
+        x: 505.5870555905931
+        y: 313.4252058790208
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          name: 创新性分析，专利检查，行业识别和竞品分析，项目流程总结
+        - id: '2'
+          name: 其他问题
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-plus
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1774287774988'
+        - sys.query
+        selected: false
+        title: 问题分类器 2
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 170
+      id: '1774313524859'
+      position:
+        x: 201.36676003616458
+        y: 549.59455535589
+      positionAbsolute:
+        x: 201.36676003616458
+        y: 549.59455535589
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 185.21672024254843
+      y: 191.3305714981541
+      zoom: 0.6040447106523488
+  rag_pipeline_variables: []
