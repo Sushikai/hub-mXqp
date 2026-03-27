@@ -1,0 +1,146 @@
+# ==================== 应用基本信息 ====================
+app:
+  name: 应用-体脂健康建议-年龄增强版
+  icon: 🤖
+  description: 基于 BMI 和 Deurenberg 公式，结合年龄与性别提供定制化健康建议。
+  mode: workflow
+
+# ==================== 工作流图（核心） ====================
+workflow:
+  graph:
+    nodes:
+      # 1. 开始节点 - 收集用户输入
+      - type: start
+        title: 开始
+        variables:
+          - key: sex
+            type: select
+            label: 性别
+            options:
+              - 男
+              - 女
+            required: true
+          - key: age
+            type: number
+            label: 年龄
+            required: true
+          - key: height
+            type: number
+            label: 身高 (cm)
+            required: true
+          - key: weight
+            type: number
+            label: 体重 (kg)
+            required: true
+
+      # 2. 代码执行节点 - 计算 BMI 和体脂率
+      - type: code
+        title: 计算核心指标
+        code: |-
+          def main(sex: str, height: float, weight: float, age: int) -> dict:
+              # 输入校验
+              if height <= 0 or weight <= 0:
+                  return {"error": "身高和体重必须大于0"}
+              
+              # 计算 BMI
+              height_m = height / 100
+              bmi = weight / (height_m ** 2)
+              
+              # 使用 Deurenberg 公式估算体脂率
+              # 公式: 1.2 * BMI + 0.23 * Age - 10.8 * Sex(1 for Male, 0 for Female) - 5.4
+              sex_value = 1 if sex == '男' else 0
+              body_fat_percentage = 1.2 * bmi + 0.23 * age - 10.8 * sex_value - 5.4
+              
+              # 限制范围 0-100
+              body_fat_percentage = max(2, min(60, body_fat_percentage)) # 修正了极端范围，体脂率极少低于2%或高于60%
+              
+              # 根据性别判断体脂状态类别 (参考标准)
+              category = ""
+              if sex == '男':
+                  if body_fat_percentage < 6:   category = '极低 (需关注健康风险)'
+                  elif body_fat_percentage < 14: category = '运动员/健美'
+                  elif body_fat_percentage < 18: category = '健康/正常'
+                  elif body_fat_percentage < 25: category = '偏高 (亚健康)'
+                  else:                          category = '肥胖 (高风险)'
+              else:  # 女
+                  if body_fat_percentage < 14:  category = '极低 (需关注健康风险)'
+                  elif body_fat_percentage < 20: category = '运动员/健美'
+                  elif body_fat_percentage < 28: category = '健康/正常'
+                  elif body_fat_percentage < 32: category = '偏高 (亚健康)'
+                  else:                          category = '肥胖 (高风险)'
+              
+              return {
+                  "bmi": round(bmi, 1),
+                  "body_fat_percentage": round(body_fat_percentage, 1),
+                  "body_fat_category": category
+              }
+
+      # 3. LLM 节点 - 调用 GPT 生成健康建议
+      - type: llm
+        title: 生成健康建议
+        model: gpt-5.2
+        # 上下文引用：引用代码节点的输出
+        inputs:
+          sex: "{{#start.sex#}}"
+          age: "{{#start.age#}}"
+          height: "{{#start.height#}}"
+          weight: "{{#start.weight#}}"
+          bmi: "{{#code.bmi#}}"
+          body_fat_percentage: "{{#code.body_fat_percentage#}}"
+          body_fat_category: "{{#code.body_fat_category#}}"
+        
+        prompt_template:
+          system: |
+            你是一名拥有10年经验的专业营养与健康管理顾问。你的任务是根据用户的生理数据，提供**个性化、科学且温暖**的建议。
+            
+            请特别注意：
+            1. **年龄适配性**：如果用户是青少年（<18岁），请强调生长发育和骨骼健康；如果是中老年人（>50岁），请强调肌肉流失预防和慢性病管理。
+            2. **语气**：专业、鼓励性，避免制造身材焦虑。
+            3. **格式**：必须严格遵守下方的输出结构。
+            
+            输出结构：
+            ### 1. 身体状态解读
+            （用一句话总结用户的BMI和体脂率处于什么水平，是否健康）
+            
+            ### 2. 饮食调整方案
+            （给出具体的宏观营养素建议，如蛋白质摄入量、碳水选择等，避免空话）
+            
+            ### 3. 运动处方
+            （根据体脂率推荐有氧或力量训练的比例）
+            
+            ### 4. 针对性生活建议
+            （结合年龄和性别的特殊注意事项）
+
+          user: |
+            请根据以下数据生成建议：
+            - 性别：{{sex}}
+            - 年龄：{{age}} 岁
+            - 身高：{{height}} cm
+            - 体重：{{weight}} kg
+            - 当前 BMI：{{bmi}}
+            - 估算体脂率：{{body_fat_percentage}}%
+            - 评估结果：{{body_fat_category}}
+
+      # 4. 模板转换节点 - 格式化最终输出
+      - type: template-transform
+        title: 格式化输出
+        template: |
+          ### 📊 您的身体成分分析报告
+
+          **基本数据**
+          > 性别：{{ sex }} | 年龄：{{ age }} 岁
+          > 身高：{{ height }} cm | 体重：{{ weight }} kg
+
+          **核心指标**
+          - **BMI 指数**: {{ bmi }}
+          - **体脂率**: {{ body_fat_percentage }}%
+          - **状态评估**: **{{ body_fat_category }}**
+
+          ---
+
+          {{ text }}
+
+      # 5. 结束节点 - 输出最终结果
+      - type: end
+        outputs:
+          - final_report: "{{#template_transform.text#}}"
