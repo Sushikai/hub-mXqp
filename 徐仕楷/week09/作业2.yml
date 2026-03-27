@@ -1,0 +1,40 @@
+# ==================== 应用基本信息 ====================
+app:
+  name: 作业2-意图识别与RAG问答
+  mode: advanced-chat        # 高级聊天模式（支持多轮对话）
+
+workflow:
+  graph:
+    nodes:
+
+    # 1. 开始节点（用户输入）
+    - type: start
+      title: 用户输入
+
+    # 2. 问题分类器（核心意图识别节点）
+    - type: question-classifier
+      title: 问题分类器
+      model: gpt-5.2
+      classes:
+        - id: '1'   name: 普通问题
+          description: 非机器学习、非大模型相关的问题（日常问答、生活常识等）
+        
+        - id: '2'   name: 机器学习问题
+          description: 涉及机器学习基础概念、监督/无监督学习、决策树、SVM、KNN、过拟合等
+        
+        - id: '1774338482580'  name: 大模型问题
+          description: 涉及大语言模型、Transformer、Prompt、RAG、Embedding、Agent、微调、模型幻觉等
+
+    # ==================== 分支1：普通问题路径 ====================
+    - type: llm
+      title: 普通问题回答LLM
+      prompt:
+        system: 你是通用问答助手，请直接回答用户问题。回答要求简洁、清楚、自然。
+        user: {{#sys.query#}}     # 用户原始问题
+
+    - type: answer
+      title: 直接回复
+      answer: {{#普通问题回答LLM.text#}}
+
+    # ==================== 分支2：机器学习问题路径 ====================
+    - type
