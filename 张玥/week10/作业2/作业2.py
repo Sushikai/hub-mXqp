@@ -36,8 +36,7 @@ def main():
     image_path = "./pdf_page_1.png"
 
     # 3. 阿里云百炼 API Key，从环境变量读取
-    # api_key = os.getenv("DASHSCOPE_API_KEY")
-    api_key = "sk-ce351751345c4f21864a944604022bc8"
+    api_key = os.getenv("DASHSCOPE_API_KEY")
     if not api_key:
         raise ValueError("未检测到环境变量 DASHSCOPE_API_KEY，请先配置 API Key。")
 
