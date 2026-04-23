@@ -24,7 +24,7 @@ app = FastAPI(
     redoc_url="/redoc",  # ReDoc endpoint
 )
 prompt='sqlite数据库，customers是用户表, employees是员工表，根据以下问题，生成一个可以直接执行的SQL查询语句，不要多余内容:'
-os.environ["OPENAI_API_KEY"] = "sk-1b0891fe1ab844d98139f95bdd6b402b"
+os.environ["OPENAI_API_KEY"] = "sk-"
 os.environ["OPENAI_BASE_URL"] = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 agent = Agent(
     model="qwen3.5-flash",  # 模型代号
