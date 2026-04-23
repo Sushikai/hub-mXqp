@@ -1,0 +1,16 @@
+1：后端 (Backend) – FastAPI 服务
+文件位置：main_server.py、routers/、services/、models/
+运行地址：http://127.0.0.1:8000
+核心职责：提供数据库交互， 各类逻辑
+前端 (Frontend) – Streamlit 应用
+文件位置：demo/ 目录下的所有.py文件
+运行地址：独立的Streamlit服务（默认http://localhost:8501）
+核心职责：
+渲染用户界面，交互，调用后端API获取数据
+这样前后端可以独立开发
+2：sqlite数据库持久化,双存储设计：
+关系型数据库用于持久化与业务查询（历史记录管理、用户反馈、会话列表）。
+AdvancedSQLiteSession 用于Agents框架的运行时状态管理，确保模型上下文连贯。
+状态隔离： 每个 session_id 对应一个独立的 AdvancedSQLiteSession 实例，不同用户的对话状态完全隔离。
+自动上下文组装： 开发者无需手动拼接历史消息；只需传递 session 对象，Agents 框架会自动处理上下文的构建与传递。
+流式支持： 整个流程支持流式输出（Server-Sent Events），实现实时对话体验。
