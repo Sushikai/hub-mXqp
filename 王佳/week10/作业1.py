@@ -8,7 +8,6 @@ from transformers import ChineseCLIPProcessor, ChineseCLIPModel
 # 加载本地Chinese-CLIP模型
 model_path = "e:/models/chinese-clip-vit-base-patch16"
 
-
 def clip_zero_shot_chinese(image_path):
     """
     使用 Chinese-CLIP进行零样本分类
@@ -21,16 +20,7 @@ def clip_zero_shot_chinese(image_path):
     image = Image.open(image_path)
 
     # 定义中文候选类别
-    candidates = [
-        "小猫",
-        "鸟",
-        "汽车",
-        "船",
-        "人",
-        "建筑",
-        "树",
-        "小狗",
-    ]
+    candidates = ["小猫","鸟","汽车","船","人","建筑","树","小狗",]
 
     # 处理输入
     inputs = processor(
