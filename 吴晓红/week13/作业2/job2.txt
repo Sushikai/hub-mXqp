@@ -1,0 +1,16 @@
+wsl --install -d Ubuntu
+wsl -d Ubuntu
+
+
+
+python3 -c "
+from modelscope import snapshot_download
+snapshot_download('Qwen/Qwen3-0.6B', cache_dir='./models')
+"
+
+apt install python3.12-venv
+python3 -m venv vllm-env
+source vllm-env/bin/activate
+cd study/badou/zhibo/src/models/
+VLLM_LOGGING_LEVEL=DEBUG vllm serve Qwen/Qwen3-0.6B
+
